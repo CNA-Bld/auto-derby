@@ -8,7 +8,7 @@ import msgpack
 from PIL.Image import Image
 
 import auto_derby
-from auto_derby.single_mode import event
+from auto_derby.single_mode import event, Context, Training
 
 LOGGER = logging.getLogger(__name__)
 
@@ -32,6 +32,27 @@ class _CharaInfo:
     def is_zekkouchou(self) -> bool:
         return self._data['motivation'] == 5
 
+    def to_fake_context(self) -> Context:
+        ctx = Context()
+
+        ctx.speed, ctx.stamina, ctx.power, ctx.guts, ctx.wisdom = \
+            self._data['speed'], self._data['stamina'], self._data['power'], self._data['guts'], self._data['wiz']
+
+        turn = self.turn()
+        ctx.date = (turn // 24, (turn % 24) // 2, turn % 1)
+
+        ctx.vitality = 1
+
+        return ctx
+
+
+def _fake_training(
+        speed: int = 0, stamina: int = 0, power: int = 0, guts: int = 0, wiz: int = 0, skill: int = 0) -> Training:
+    training = Training.new()
+    training.speed, training.stamina, training.power, training.guts, training.wisdom, training.skill = \
+        speed, stamina, power, guts, wiz, skill
+    return training
+
 
 _Resolver = typing.Callable[[_CharaInfo, list[int]], int]
 
@@ -44,12 +65,20 @@ def _make_choice_vital(used_threshold: int, low_choice: int, high_choice: int) -
     return lambda chara_info, choice_ids: low_choice if chara_info.used_vital() >= used_threshold else high_choice
 
 
-STORY_CHOICE_RESOLVERS: dict[int, _Resolver] = {
-    # セイウンスカイ 晴天の攻防
-    501020524: lambda chara_info, choice_ids: 2 if choice_ids[1] == 3 else 1 if choice_ids[0] == 1 else 3,
+def _make_choice_fake_training(*options: Training) -> _Resolver:
+    def resolve(chara_info: _CharaInfo, choice_ids: list[int]) -> int:
+        ctx = chara_info.to_fake_context()
+        scores = [option.score(ctx) for option in options]
+        LOGGER.info("Fake training scores: %s", scores)
+        return scores.index(max(scores)) + 1
 
-    # トウカイテイオー（新衣装） ボクとみんなとカップケーキ
-    501003511: _make_choice_yaruki(2, 1),
+    return resolve
+
+
+SUMMER_CAMP_2ND_YEAR_RESOLVER = _make_choice_fake_training(_fake_training(power=10), _fake_training(guts=10))
+
+STORY_CHOICE_RESOLVERS: dict[int, _Resolver] = {
+    # ========== Support card events
 
     # スーパークリークSSR お手伝いもお任せ♪
     801045001: _make_choice_vital(15, 1, 2),
@@ -74,6 +103,27 @@ STORY_CHOICE_RESOLVERS: dict[int, _Resolver] = {
 
     # ダイワスカーレットSR このくらい平気なんだから！
     801009002: lambda chara_info, _: 1 if chara_info.is_zekkouchou() and chara_info.used_vital() < 20 else 2,
+
+    # ========== Chara events
+
+    # セイウンスカイ 晴天の攻防
+    501020524: lambda chara_info, choice_ids: 2 if choice_ids[1] == 3 else 1 if choice_ids[0] == 1 else 3,
+
+    # トウカイテイオー（新衣装） ボクとみんなとカップケーキ
+    501003511: _make_choice_yaruki(2, 1),
+
+    # トウカイテイオー カイチョーとダジャレ
+    501003706: _make_choice_fake_training(_fake_training(stamina=5, power=5), _fake_training(speed=10)),
+
+    # ========== Chara events 515/802
+
+    # トウカイテイオー（新衣装） ネバー・ギブ・アップ・ワガハイ！
+    501003802: _make_choice_fake_training(_fake_training(stamina=15, guts=5), _fake_training(power=5, wiz=15)),
+
+    # ========== Chara events 506 (ダンスレッスン)
+
+    # トウカイテイオー
+    501003506: _make_choice_fake_training(_fake_training(stamina=10), _fake_training(power=10)),
 }
 
 
@@ -132,7 +182,7 @@ class Plugin(auto_derby.Plugin):
         if story_id == chara_info.shared_story_id(102):  # 初詣
             return 1 if chara_info.used_vital() >= 30 else 3
         if story_id == chara_info.shared_story_id(104):  # 夏合宿（2年目）にて
-            return 1
+            return SUMMER_CAMP_2ND_YEAR_RESOLVER(chara_info, choice_ids)
         if (story_id == 400000043 or story_id == chara_info.shared_story_id(713)  # お大事に！
                 or story_id == 400000044 or story_id == chara_info.shared_story_id(714)):  # 無茶は厳禁！
             return 2 if choice_ids[1] == 2 else 1
@@ -144,6 +194,8 @@ class Plugin(auto_derby.Plugin):
                 return 1
             if choice_ids[0] == 1 and choice_ids[1] == 2:
                 return 2
+            if story_id in STORY_CHOICE_RESOLVERS:
+                return STORY_CHOICE_RESOLVERS[story_id](chara_info, choice_ids)
             return None
         if (story_id == chara_info.shared_story_id(708)  # レース勝利！
                 or story_id in (501024724, 501040734, 501040738)
