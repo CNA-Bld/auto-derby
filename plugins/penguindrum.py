@@ -81,18 +81,12 @@ def _generic_resolve(chara_info: _CharaInfo, choice_ids: list[int], options: typ
     return scores.index(max(scores)) + 1
 
 
-def _generic_resolver(*options: _Option) -> _Resolver:
-    def resolve(chara_info: _CharaInfo, choice_ids: list[int]) -> int:
-        return _generic_resolve(chara_info, choice_ids, options)
-
-    return resolve
-
-
 def _make_choice_yaruki(zekkouchou_choice: int, else_choice: int) -> _Resolver:
     return lambda chara_info, choice_ids: zekkouchou_choice if chara_info.is_zekkouchou() else else_choice
 
 
-SUMMER_CAMP_2ND_YEAR_RESOLVER = _generic_resolver(_Option(power=10), _Option(guts=10))
+SUMMER_CAMP_2ND_YEAR_RESOLVER: _Resolver = \
+    lambda chara_info, choice_ids: _generic_resolve(chara_info, choice_ids, (_Option(power=10), _Option(guts=10)))
 
 STORY_CHOICE_OPTIONS: dict[int, typing.Tuple[_Option, ...]] = {
     # ダンスレッスン
@@ -1951,6 +1945,9 @@ STORY_CHOICE_OPTIONS.update({
     # トレーナー並の知識
     400001025: (_Option(power=10), _Option(speed=10)),
 
+    # 愉快ッ！　密着取材！
+    400001027: (_Option(stamina=10), _Option(guts=10)),
+
     # 選んだ生き方
     809001001: (_Option(vital=14, yaruki_up=True), _Option(wiz=6, yaruki_up=True)),
 
@@ -1961,26 +1958,14 @@ STORY_CHOICE_OPTIONS.update({
     809004001: (_Option(vital=14, skill=18), _Option(speed=6, wiz=6)),
 })
 
-ALWAYS_CHOOSE_FIRST: _Resolver = lambda char_info, choice_ids: 1
-ALWAYS_CHOOSE_SECOND: _Resolver = lambda char_info, choice_ids: 2
-ALWAYS_CHOOSE_THIRD: _Resolver = lambda char_info, choice_ids: 3
+ALWAYS_CHOOSE_FIRST: _Resolver = lambda chara_info, choice_ids: 1
+ALWAYS_CHOOSE_SECOND: _Resolver = lambda chara_info, choice_ids: 2
+ALWAYS_CHOOSE_THIRD: _Resolver = lambda chara_info, choice_ids: 3
 
 CHOOSE_FIRST_IF_1_ELSE_SECOND: _Resolver = lambda chara_info, choice_ids: 1 if choice_ids[0] == 1 else 2
+CHOOSE_SECOND_IF_1_ELSE_FIRST: _Resolver = lambda chara_info, choice_ids: 2 if choice_ids[1] == 1 else 1
 
 STORY_CHOICE_RESOLVERS: dict[int, _Resolver] = {
-    # ========== Support card events
-
-    # メジロドーベルSSR 踏み出す、一歩
-    830041001: CHOOSE_FIRST_IF_1_ELSE_SECOND,
-
-    # キタサンブラックSSR 情けは人のためならず
-    830028002: _make_choice_yaruki(2, 1),
-
-    # ========== Chara events
-
-    # セイウンスカイ 晴天の攻防
-    501020524: lambda chara_info, choice_ids: 2 if choice_ids[1] == 3 else 1 if choice_ids[0] == 1 else 3,
-
     # オグリの大食い選手権
     501006524: CHOOSE_FIRST_IF_1_ELSE_SECOND,
 
@@ -2005,6 +1990,9 @@ STORY_CHOICE_RESOLVERS: dict[int, _Resolver] = {
 
     # レース場グルメの誘惑
     501013524: CHOOSE_FIRST_IF_1_ELSE_SECOND,
+
+    # セイウンスカイ 晴天の攻防
+    501020524: lambda chara_info, choice_ids: 2 if choice_ids[1] == 3 else 1 if choice_ids[0] == 1 else 3,
 
     # ちょっと寄り道！
     501052702: ALWAYS_CHOOSE_FIRST,
@@ -2045,6 +2033,9 @@ STORY_CHOICE_RESOLVERS: dict[int, _Resolver] = {
     # サイボーグではありません
     820009001: ALWAYS_CHOOSE_FIRST,
 
+    # 私の、運勢……
+    820017001: CHOOSE_SECOND_IF_1_ELSE_FIRST,
+
     # とっておきのお友だち？
     820023001: ALWAYS_CHOOSE_FIRST,
 
@@ -2075,6 +2066,9 @@ STORY_CHOICE_RESOLVERS: dict[int, _Resolver] = {
     # ターボは強いんだもん！
     830026003: ALWAYS_CHOOSE_FIRST,
 
+    # 情けは人のためならず
+    830028002: _make_choice_yaruki(2, 1),
+
     # 求む、個性！
     830030001: _make_choice_yaruki(2, 1),
 
@@ -2083,6 +2077,9 @@ STORY_CHOICE_RESOLVERS: dict[int, _Resolver] = {
 
     # 理の食VS暴の食
     830032002: ALWAYS_CHOOSE_FIRST,
+
+    # 踏み出す、一歩
+    830041001: CHOOSE_FIRST_IF_1_ELSE_SECOND,
 
     # チケゾー☆フレンドシップ！
     830046002: ALWAYS_CHOOSE_FIRST,
