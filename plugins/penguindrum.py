@@ -1,5 +1,6 @@
 import http.server
 import logging
+import os
 import threading
 import typing
 from typing import Optional
@@ -264,11 +265,13 @@ class Plugin(auto_derby.Plugin):
                     return
                 _self.send_response(404)
 
-        self._httpd = http.server.HTTPServer(('127.0.0.1', 2434), Handler)
+        address = ('127.0.0.1', int(os.getenv('PENGUINDRUM_SERVER_PORT', '2434')))
+
+        self._httpd = http.server.HTTPServer(address, Handler)
         self._server_thread = threading.Thread(target=self._httpd.serve_forever)
         self._server_thread.setDaemon(True)
         self._server_thread.start()
-        LOGGER.info("Server started")
+        LOGGER.info("Server started at %s", address)
 
     def infer_choice(self, chara_info: _CharaInfo, story_id: int, choice_ids: list[int]) -> Optional[int]:
         LOGGER.info("Attempting to infer choice for story %d at turn %d, choice_ids %s",
