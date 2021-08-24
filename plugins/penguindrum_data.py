@@ -1,7 +1,41 @@
 import typing
 from abc import abstractmethod, ABC
 
-from auto_derby.single_mode import Training
+from auto_derby.single_mode import Training, Context
+
+
+class _CharaInfo:
+    def __init__(self, data):
+        self._data = data
+        self.fake_context = self._to_fake_context()
+
+    def chara_id(self) -> int:
+        return self._data['card_id'] // 100
+
+    def turn(self) -> int:
+        return self._data['turn']
+
+    def shared_story_id(self, suffix: int, prefix: int = 50) -> int:
+        return int('%2d%04d%03d' % (prefix, self.chara_id(), suffix))
+
+    def used_vital(self) -> int:
+        return self._data['max_vital'] - self._data['vital']
+
+    def is_zekkouchou(self) -> bool:
+        return self._data['motivation'] == 5
+
+    def _to_fake_context(self) -> Context:
+        ctx = Context.new()
+
+        ctx.speed, ctx.stamina, ctx.power, ctx.guts, ctx.wisdom = \
+            self._data['speed'], self._data['stamina'], self._data['power'], self._data['guts'], self._data['wiz']
+
+        turn = self.turn()
+        ctx.date = (turn // 24, (turn % 24) // 2, turn % 1)
+
+        ctx.vitality = 1
+
+        return ctx
 
 
 class _BaseOption(ABC):
@@ -27,6 +61,22 @@ class _Option(_BaseOption):
 
     def get_option(self, choice_id):
         return self
+
+    def score(self, chara_info: _CharaInfo):
+        ret = 0
+
+        if self.yaruki_up and not chara_info.is_zekkouchou():
+            ret += 1000
+
+        if self.vital > 0:
+            added_vital = min(self.vital, chara_info.used_vital())
+            ret += added_vital * 10
+        elif self.vital < 0:
+            ret += self.vital * 10
+
+        ret += self.fake_training.score(chara_info.fake_context)
+
+        return ret
 
 
 GENERATED_STORY_CHOICE_OPTIONS: dict[int, typing.Tuple[_Option, ...]] = {

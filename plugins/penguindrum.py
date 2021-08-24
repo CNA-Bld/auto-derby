@@ -9,43 +9,10 @@ import msgpack
 from PIL.Image import Image
 
 import auto_derby
-from auto_derby.single_mode import event, Context
-from plugins.penguindrum_data import GENERATED_STORY_CHOICE_OPTIONS, _Option, _BaseOption
+from auto_derby.single_mode import event
+from plugins.penguindrum_data import GENERATED_STORY_CHOICE_OPTIONS, _Option, _BaseOption, _CharaInfo
 
 LOGGER = logging.getLogger(__name__)
-
-
-class _CharaInfo:
-    def __init__(self, data):
-        self._data = data
-
-    def chara_id(self) -> int:
-        return self._data['card_id'] // 100
-
-    def turn(self) -> int:
-        return self._data['turn']
-
-    def shared_story_id(self, suffix: int, prefix: int = 50) -> int:
-        return int('%2d%04d%03d' % (prefix, self.chara_id(), suffix))
-
-    def used_vital(self) -> int:
-        return self._data['max_vital'] - self._data['vital']
-
-    def is_zekkouchou(self) -> bool:
-        return self._data['motivation'] == 5
-
-    def to_fake_context(self) -> Context:
-        ctx = Context.new()
-
-        ctx.speed, ctx.stamina, ctx.power, ctx.guts, ctx.wisdom = \
-            self._data['speed'], self._data['stamina'], self._data['power'], self._data['guts'], self._data['wiz']
-
-        turn = self.turn()
-        ctx.date = (turn // 24, (turn % 24) // 2, turn % 1)
-
-        ctx.vitality = 1
-
-        return ctx
 
 
 class _RandomizedOption(_BaseOption):
@@ -61,19 +28,8 @@ _Resolver = typing.Callable[[_CharaInfo, list[int]], int]
 
 def _generic_resolve(chara_info: _CharaInfo, choice_ids: list[int], base_options: typing.Iterable[_BaseOption]) -> int:
     options = [o.get_option(choice_id) for o, choice_id in zip(base_options, choice_ids)]
-
-    if not chara_info.is_zekkouchou():
-        for i, option in enumerate(options):
-            if option.yaruki_up:
-                return i + 1
-
-    for i, option in enumerate(options):
-        if 0 < option.vital <= chara_info.used_vital():
-            return i + 1
-
-    ctx = chara_info.to_fake_context()
-    scores = [option.fake_training.score(ctx) for (i, option) in enumerate(options)]
-    LOGGER.info("Fake training scores: %s", scores)
+    scores = [option.score(chara_info) for (i, option) in enumerate(options)]
+    LOGGER.info("Option scores: %s", scores)
     return scores.index(max(scores)) + 1
 
 
