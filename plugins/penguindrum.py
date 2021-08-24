@@ -10,7 +10,7 @@ from PIL.Image import Image
 
 import auto_derby
 from auto_derby.single_mode import event, Context
-from plugins.penguindrum_data import GENERATED_STORY_CHOICE_OPTIONS, _Option
+from plugins.penguindrum_data import GENERATED_STORY_CHOICE_OPTIONS, _Option, _BaseOption
 
 LOGGER = logging.getLogger(__name__)
 
@@ -35,7 +35,7 @@ class _CharaInfo:
         return self._data['motivation'] == 5
 
     def to_fake_context(self) -> Context:
-        ctx = Context()
+        ctx = Context.new()
 
         ctx.speed, ctx.stamina, ctx.power, ctx.guts, ctx.wisdom = \
             self._data['speed'], self._data['stamina'], self._data['power'], self._data['guts'], self._data['wiz']
@@ -48,10 +48,20 @@ class _CharaInfo:
         return ctx
 
 
+class _RandomizedOption(_BaseOption):
+    def __init__(self, children: dict[int, _Option]):
+        self.children = children
+
+    def get_option(self, choice_id):
+        return self.children[choice_id]  # This throws an Exception if choice_id is unknown.
+
+
 _Resolver = typing.Callable[[_CharaInfo, list[int]], int]
 
 
-def _generic_resolve(chara_info: _CharaInfo, choice_ids: list[int], options: typing.Iterable[_Option]) -> int:
+def _generic_resolve(chara_info: _CharaInfo, choice_ids: list[int], base_options: typing.Iterable[_BaseOption]) -> int:
+    options = [o.get_option(choice_id) for o, choice_id in zip(base_options, choice_ids)]
+
     if not chara_info.is_zekkouchou():
         for i, option in enumerate(options):
             if option.yaruki_up:
@@ -74,7 +84,7 @@ def _make_choice_yaruki(zekkouchou_choice: int, else_choice: int) -> _Resolver:
 SUMMER_CAMP_2ND_YEAR_RESOLVER: _Resolver = \
     lambda chara_info, choice_ids: _generic_resolve(chara_info, choice_ids, (_Option(power=10), _Option(guts=10)))
 
-STORY_CHOICE_OPTIONS: dict[int, typing.Tuple[_Option, ...]] = GENERATED_STORY_CHOICE_OPTIONS.copy()
+STORY_CHOICE_OPTIONS: dict[int, typing.Tuple[_BaseOption, ...]] = GENERATED_STORY_CHOICE_OPTIONS.copy()
 
 STORY_CHOICE_OPTIONS.update({
     # トレーナー並の知識

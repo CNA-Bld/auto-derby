@@ -1,9 +1,16 @@
 import typing
+from abc import abstractmethod, ABC
 
 from auto_derby.single_mode import Training
 
 
-class _Option:
+class _BaseOption(ABC):
+    @abstractmethod
+    def get_option(self, choice_id):
+        pass
+
+
+class _Option(_BaseOption):
     def __init__(self,
                  speed: int = 0, stamina: int = 0, power: int = 0, guts: int = 0, wiz: int = 0, skill: int = 0,
                  yaruki_up: bool = False, vital: int = 0,
@@ -17,6 +24,9 @@ class _Option:
         training.speed, training.stamina, training.power, training.guts, training.wisdom, training.skill = \
             self.speed, self.stamina, self.power, self.guts, self.wiz, self.skill
         return training
+
+    def get_option(self, choice_id):
+        return self
 
 
 GENERATED_STORY_CHOICE_OPTIONS: dict[int, typing.Tuple[_Option, ...]] = {
