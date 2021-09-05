@@ -18,8 +18,11 @@ class _CharaInfo:
     def shared_story_id(self, suffix: int, prefix: int = 50) -> int:
         return int('%2d%04d%03d' % (prefix, self.chara_id(), suffix))
 
+    def remaining_vital(self) -> int:
+        return self._data['vital']
+
     def used_vital(self) -> int:
-        return self._data['max_vital'] - self._data['vital']
+        return self._data['max_vital'] - self.remaining_vital()
 
     def is_zekkouchou(self) -> bool:
         return self._data['motivation'] == 5
@@ -68,11 +71,12 @@ class _Option(_BaseOption):
         if self.yaruki_up and not chara_info.is_zekkouchou():
             ret += 1000
 
+        vital_diff = 0
         if self.vital > 0:
-            added_vital = min(self.vital, chara_info.used_vital())
-            ret += added_vital * 10
+            vital_diff = min(self.vital, chara_info.used_vital())
         elif self.vital < 0:
-            ret += self.vital * 10
+            vital_diff = -min(-self.vital, chara_info.remaining_vital())
+        ret += vital_diff * 2
 
         ret += self.fake_training.score(chara_info.fake_context)
 
