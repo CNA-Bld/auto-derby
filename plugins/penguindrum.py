@@ -9,6 +9,8 @@ import msgpack
 from PIL.Image import Image
 
 import auto_derby
+from auto_derby.constants import RuningStyle
+from auto_derby.scenes import PaddockScene
 from auto_derby.single_mode import event
 from plugins.penguindrum_data import GENERATED_STORY_CHOICE_OPTIONS, _Option, _BaseOption, _CharaInfo
 
@@ -209,6 +211,9 @@ class Plugin(auto_derby.Plugin):
     def install(self) -> None:
         self._orig_get_choice = event.get_choice
         event.get_choice = self.get_choice
+
+        self.override_paddock_scene()
+
         self.run_server()
 
     def run_server(self):
@@ -320,6 +325,22 @@ class Plugin(auto_derby.Plugin):
                 LOGGER.error(e)
 
         return self._orig_get_choice(event_screen)
+
+    def override_paddock_scene(self):
+        orig_choose_running_style = PaddockScene.choose_runing_style
+
+        def choose_runing_style(_self, style: RuningStyle):
+            if self._last_response is not None:
+                try:
+                    response = msgpack.unpackb(self._last_response)
+                    current_running_style = response['data']['chara_info']['race_running_style']
+                    if current_running_style == style.value:
+                        return
+                except Exception as e:
+                    LOGGER.error(e)
+            return orig_choose_running_style(_self, style)
+
+        PaddockScene.choose_runing_style = choose_runing_style
 
 
 auto_derby.plugin.register(__name__, Plugin())
