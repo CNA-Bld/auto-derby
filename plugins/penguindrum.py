@@ -95,6 +95,9 @@ STORY_CHOICE_RESOLVERS: dict[int, _Resolver] = {
     # レース場グルメの誘惑
     501013524: CHOOSE_FIRST_IF_1_ELSE_SECOND,
 
+    # ターフにネイリスト
+    820035001: CHOOSE_FIRST_IF_1_ELSE_SECOND,
+
     # セイウンスカイ 晴天の攻防
     501020524: lambda chara_info, choice_ids: 2 if choice_ids[1] == 3 else 1 if choice_ids[0] == 1 else 3,
 
