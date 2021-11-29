@@ -12,7 +12,8 @@ import auto_derby
 from auto_derby.constants import RuningStyle
 from auto_derby.scenes import PaddockScene
 from auto_derby.single_mode import event
-from plugins.penguindrum_data import GENERATED_STORY_CHOICE_OPTIONS, _Option, _BaseOption, _CharaInfo
+from plugins.penguindrum_data import GENERATED_STORY_CHOICE_OPTIONS
+from plugins.penguindrum_models import _CharaInfo, _BaseOption, _Option
 
 LOGGER = logging.getLogger(__name__)
 
