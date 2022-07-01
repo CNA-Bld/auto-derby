@@ -2227,4 +2227,544 @@ GENERATED_STORY_CHOICE_OPTIONS: dict[int, typing.Tuple[_Option, ...]] = {
 
     # キラッと輝くマーベラス☆
     830074002: (_Option(vital=10), _Option(skill_hint=True)),
+
+    # マーベラス売りの少女
+    400004324: (_Option(vital=10), _Option(skill_hint=True)),
+
+    # 家族（？）でショッピング！
+    400004325: (_Option(skill=24), _Option(skill_hint=True)),
+
+    # 凸凹コンビ
+    400004326: (_Option(power=6, guts=6), _Option(skill_hint=True)),
+
+    # ワールドワイド・ウインディ
+    400004327: (_Option(speed=6, guts=6), _Option(skill_hint=True)),
+
+    # ベガとスピカ
+    400004328: (_Option(speed=6, wiz=6), _Option(skill_hint=True)),
+
+    # 『退学』を賭けた勝負
+    400004329: (_Option(stamina=6, wiz=6), _Option(skill_hint=True)),
+
+    # パワフル最強シンデレラ！
+    400004330: (_Option(yaruki_up=True), _Option(skill_hint=True)),
+
+    # ヴィクトリー倶楽部、参上！
+    400004331: (_Option(stamina=6, wiz=6), _Option(skill_hint=True)),
+
+    # 甘えたがりのお年頃
+    400004332: (_Option(speed=6, wiz=6), _Option(skill_hint=True)),
+
+    # カワイイを守りたい！
+    400004333: (_Option(stamina=6, power=6), _Option(skill_hint=True)),
+
+    # 語り合いたい！
+    400004334: (_Option(stamina=6, guts=6), _Option(skill_hint=True)),
+
+    # 同じ傘の下で
+    400004335: (_Option(speed=6, guts=6), _Option(skill_hint=True)),
+
+    # ゴルシちゃん主催！人狼は誰だ！？
+    400004336: (_Option(power=6, wiz=6), _Option(skill_hint=True)),
+
+    # ドキドキフルーツフェス
+    400004337: (_Option(stamina=6, power=6), _Option(skill_hint=True)),
+
+    # サプライズ大作戦！
+    400004338: (_Option(yaruki_up=True), _Option(skill_hint=True)),
+
+    # ひとり暮らしの生活
+    400004339: (_Option(power=6, guts=6), _Option(skill_hint=True)),
+
+    # アグネスデジタル、爆発す
+    400004341: (_Option(yaruki_up=True), _Option(skill_hint=True)),
+
+    # 『全力』&『普通』ダイエット！
+    400004342: (_Option(stamina=6, guts=6), _Option(skill_hint=True)),
+
+    # タイキとパールと外国語
+    400004343: (_Option(speed=6, wiz=6), _Option(skill_hint=True)),
+
+    # タマモのゲームセンター奮闘記
+    400004344: (_Option(guts=6, wiz=6), _Option(skill_hint=True)),
+
+    # アルダンからは逃げ切れない
+    400004345: (_Option(speed=6, guts=6), _Option(skill_hint=True)),
+
+    # 委員たちの井戸端会議
+    400004346: (_Option(speed=6, power=6), _Option(skill_hint=True)),
+
+    # 意外な美化委員
+    400004347: (_Option(power=6, wiz=6), _Option(skill_hint=True)),
+
+    # マルゼンさんへの気持ち
+    400004348: (_Option(skill=24), _Option(skill_hint=True)),
+
+    # 怖くないって怖いです
+    400004349: (_Option(stamina=6, guts=6), _Option(skill_hint=True)),
+
+    # 目が離せないお嬢様たち
+    400004350: (_Option(guts=6, wiz=6), _Option(skill_hint=True)),
+
+    # ゴルシを治せ！？
+    400004351: (_Option(speed=6, power=6), _Option(skill_hint=True)),
+
+    # じいちゃん子たちの集い
+    400004352: (_Option(stamina=6, wiz=6), _Option(skill_hint=True)),
+
+    # ふたりと宿根草
+    400004353: (_Option(speed=6, power=6), _Option(skill_hint=True)),
+
+    # 名探偵のボクにお任せ！
+    400004354: (_Option(speed=6, stamina=6), _Option(skill_hint=True)),
+
+    # キセキのカタチ
+    501005800: (_Option(guts=10), _Option(vital=15, yaruki_up=True, skill=10)),
+
+    # 目に映る君は
+    501005802: (_Option(wiz=10), _Option(skill_hint=True)),
+
+    # 新たな魅力を……
+    501015802: (_Option(skill_hint=True), _Option(power=10)),
+
+    # 『リーニュ・ドロワット』の前に
+    501020800: (_Option(vital=30), _Option(wiz=10)),
+
+    # みんなには、一応秘密で
+    501020802: (_Option(stamina=15), _Option(skill_hint=True)),
+
+    # ダンスレッスン
+    501021506: (_Option(power=10), _Option(wiz=10)),
+
+    # 浪花魂みせたるわい！
+    501021510: (_Option(speed=5, power=5), _Option(stamina=10)),
+
+    # これなんぼやと思う？
+    501021511: (_Option(power=10), _Option(stamina=10)),
+
+    # 稲妻ハート
+    501021513: (_Option(guts=20), _Option(vital=15)),
+
+    # たこパ、やったるで！
+    501021514: (_Option(speed=10, power=10), _Option(guts=10, wiz=10)),
+
+    # ウチに似合う服
+    501021515: (_Option(speed=20), _Option(power=10, guts=10)),
+
+    # 大人ってなんなん？
+    501021520: (_Option(speed=5, power=10), _Option(skill_hint=True)),
+
+    # 姉ちゃんにまかしとき！
+    501021702: (_Option(power=10), _Option(stamina=10)),
+
+    # 行ったれ！牧場体験！
+    501021703: (_Option(vital=10), _Option(stamina=10)),
+
+    # 助け、助けられ
+    501021704: (_Option(guts=10), _Option(wiz=10), _Option(speed=10)),
+
+    # おとろしないで、おいなりさん
+    501021705: (_Option(speed=10), _Option(guts=10)),
+
+    # 恐怖のネバネバ
+    501021706: (_Option(wiz=10), _Option(power=10)),
+
+    # ダンスレッスン
+    501022506: (_Option(power=10), _Option(wiz=10)),
+
+    # 殿下の華麗なるたしなみ
+    501022510: (_Option(power=10), _Option(wiz=10)),
+
+    # 殿下と刺激的なお茶会
+    501022511: (_Option(speed=5, guts=5), _Option(stamina=5, power=5)),
+
+    # 約束のシャムロック
+    501022513: (_Option(power=20), _Option(speed=20)),
+
+    # よしよし殿下
+    501022514: (_Option(stamina=10, guts=10), _Option(wiz=20)),
+
+    # 殿下と映画鑑賞会
+    501022515: (_Option(power=10, guts=10), _Option(wiz=10, skill=15)),
+
+    # 遠くの地より花は来りて
+    501022520: (_Option(stamina=10, skill=15), _Option(skill_hint=True)),
+
+    # こういうの、ロマンでしょう？
+    501022702: (_Option(wiz=10), _Option(power=10)),
+
+    # 異国の地ならなんでも
+    501022703: (_Option(guts=10), _Option(speed=10)),
+
+    # 大儀であります
+    501022704: (_Option(stamina=10), _Option(wiz=10), _Option(power=10)),
+
+    # 殿下がバザーにやってきた！
+    501022705: (_Option(wiz=10), _Option(power=10)),
+
+    # 殿下、推し文化に触れる
+    501022706: (_Option(speed=10), _Option(guts=10)),
+
+    # Not Found
+    501026801: (_Option(vital=10, speed=10, stamina=15), _Option(vital=10, skill_hint=True)),
+
+    # ダンスレッスン
+    501033506: (_Option(wiz=10), _Option(speed=10)),
+
+    # 必殺・アヤベさん
+    501033510: (_Option(vital=-10, power=20), _Option(guts=10)),
+
+    # 同室シスターにはかなわない
+    501033511: (_Option(speed=10), _Option(vital=5, power=5)),
+
+    # 想いよ届け
+    501033513: (_Option(power=20), _Option(stamina=20)),
+
+    # 静かに通じて
+    501033514: (_Option(wiz=20), _Option(speed=20)),
+
+    # たった1つの使命
+    501033515: (_Option(power=10, guts=10), _Option(speed=20)),
+
+    # 雲の向こう、宙のかなた
+    501033520: (_Option(power=10, skill=15), _Option(skill_hint=True)),
+
+    # それは、当たり前
+    501033702: (_Option(power=10), _Option(wiz=10)),
+
+    # 言葉+……
+    501033703: (_Option(vital=10), _Option(speed=10)),
+
+    # ようやく、受け取るモノ
+    501033704: (_Option(guts=10), _Option(stamina=10), _Option(wiz=10)),
+
+    # もふもふ審美眼
+    501033705: (_Option(wiz=10), _Option(power=10)),
+
+    # 夢で見た光景
+    501033706: (_Option(stamina=10), _Option(speed=10)),
+
+    # その時間は贈り物
+    501037801: (_Option(vital=10, speed=15, wiz=10), _Option(vital=10, skill_hint=True)),
+
+    # 見習いお姉さん
+    501051510: (_Option(wiz=10), _Option(vital=10)),
+
+    # メイド・イン・フラワー
+    501051511: (_Option(speed=10), _Option(yaruki_up=True, guts=5)),
+
+    # 色形、重ねて私
+    501051513: (_Option(speed=20), _Option(vital=10, wiz=10)),
+
+    # お姉さんらしく
+    501051514: (_Option(power=20), _Option(wiz=10, skill=15)),
+
+    # 小さな体に大きな愛
+    501051515: (_Option(stamina=20), _Option(guts=20)),
+
+    # 凜と咲く
+    501051520: (_Option(vital=5, stamina=5, power=5), _Option(skill_hint=True)),
+
+    # フラワーの知恵袋
+    501051702: (_Option(stamina=10), _Option(wiz=10)),
+
+    # フラワー・リラクゼーション
+    501051703: (_Option(vital=5, speed=5), _Option(vital=5, guts=5)),
+
+    # フラワー日和
+    501051704: (_Option(stamina=10), _Option(speed=10), _Option(wiz=10)),
+
+    # 寄り添う花
+    501051705: (_Option(guts=10), _Option(speed=10)),
+
+    # 近日公開予定
+    501051706: (_Option(wiz=10), _Option(power=10)),
+
+    # ダンスレッスン
+    501062506: (_Option(guts=10), _Option(wiz=10)),
+
+    # 恋は焼きサバの味
+    501062510: (_Option(stamina=10), _Option(yaruki_up=True, speed=5)),
+
+    # シュビビッと解決！
+    501062511: (_Option(power=10), _Option(vital=5, skill=15)),
+
+    # 『普通』の先へ
+    501062513: (_Option(power=20), _Option(guts=20)),
+
+    # 神父マチタンと結婚式
+    501062514: (_Option(wiz=20), _Option(stamina=10, skill=15)),
+
+    # 敏腕看板娘、誕生
+    501062515: (_Option(stamina=10, power=10), _Option(guts=10, wiz=10)),
+
+    # お待ちかねのランチ
+    501062520: (_Option(yaruki_up=True, stamina=10), _Option(skill_hint=True)),
+
+    # 私だってやる時は……！？
+    501062702: (_Option(stamina=10), _Option(wiz=10)),
+
+    # おもてなしの反対
+    501062703: (_Option(guts=10), _Option(stamina=10)),
+
+    # いつも、いつまでも！
+    501062704: (_Option(wiz=10), _Option(speed=10), _Option(guts=10)),
+
+    # 目指せ！頼れるお姉ちゃん
+    501062705: (_Option(power=10), _Option(guts=10)),
+
+    # マチタンの初代帽子
+    501062706: (_Option(stamina=5, wiz=5), _Option(speed=10)),
+
+    # ダンスレッスン
+    501067506: (_Option(speed=10), _Option(power=10)),
+
+    # しゃっくりSOS
+    501067510: (_Option(stamina=10), _Option(power=10)),
+
+    # 禁断のブレンド
+    501067511: (_Option(wiz=10), _Option(yaruki_up=True, stamina=5)),
+
+    # 剛なるダイヤは真綿の中に
+    501067513: (_Option(guts=20), _Option(stamina=20)),
+
+    # スイーピー5☆入団テスト！
+    501067514: (_Option(speed=20), _Option(power=10, skill=15)),
+
+    # サトノ家として、ウマ娘として
+    501067515: (_Option(wiz=20), _Option(stamina=10, power=10)),
+
+    # 大きすぎる志
+    501067520: (_Option(power=10, guts=5), _Option(skill_hint=True)),
+
+    # 裏路地アドベンチャー
+    501067702: (_Option(wiz=10), _Option(power=10)),
+
+    # フレッシュ！
+    501067703: (_Option(speed=10), _Option(stamina=10)),
+
+    # ハートビート・エキサイト
+    501067704: (_Option(stamina=10), _Option(guts=10), _Option(wiz=10)),
+
+    # コンビニ前にはご注意を
+    501067705: (_Option(stamina=10), _Option(guts=10)),
+
+    # たくさんの彩りの中で
+    501067706: (_Option(speed=10), _Option(guts=10)),
+
+    # ダンスレッスン
+    501068506: (_Option(guts=10), _Option(wiz=10)),
+
+    # 魔女さんとキタサン
+    501068510: (_Option(stamina=10), _Option(yaruki_up=True, speed=5)),
+
+    # 先輩と！
+    501068511: (_Option(speed=10), _Option(vital=10)),
+
+    # フォーゲットミーノット！
+    501068513: (_Option(stamina=20), _Option(speed=20)),
+
+    # 陰に日なたに
+    501068514: (_Option(speed=10, wiz=10), _Option(power=20)),
+
+    # かわいいの才能っ！
+    501068515: (_Option(stamina=10, wiz=10), _Option(guts=20)),
+
+    # ちょいとドラマへの出演も目指し
+    501068520: (_Option(speed=5, guts=10), _Option(skill_hint=True)),
+
+    # 緊急開店！キタちゃんマッサージ
+    501068524: (_Option(speed=20), _Option(vital=10, guts=10), _Option(skill_hint=True)),
+
+    # 寄ってらっしゃい見てらっしゃい！
+    501068702: (_Option(stamina=10), _Option(wiz=10)),
+
+    # 妖怪変化もなんのその！
+    501068703: (_Option(speed=5, stamina=5), _Option(guts=10)),
+
+    # 主役はみなさまお祭りワッショイ！
+    501068704: (_Option(wiz=10), _Option(power=10), _Option(speed=10)),
+
+    # ほろ甘の思い出
+    501068705: (_Option(stamina=10), _Option(guts=5, wiz=5)),
+
+    # あなたの声なら
+    501068706: (_Option(wiz=10), _Option(power=10)),
+
+    # ダンスレッスン
+    501069506: (_Option(wiz=10), _Option(power=10)),
+
+    # 最近流行りのブティックで
+    501069510: (_Option(speed=10), _Option(wiz=10)),
+
+    # 風紀委員長賞、受賞者ですから
+    501069511: (_Option(vital=5, power=5), _Option(stamina=10)),
+
+    # 『そこにあるのが、日常である』
+    501069513: (_Option(power=10, wiz=10), _Option(stamina=20)),
+
+    # 『想いはバブリーに包め』
+    501069514: (_Option(guts=10, skill=15), _Option(wiz=20)),
+
+    # 『花は桜木、ウマ娘は……』
+    501069515: (_Option(power=20), _Option(speed=20)),
+
+    # どすこい！決まり手指導！？
+    501069520: (_Option(speed=10, guts=5), _Option(skill_hint=True)),
+
+    # チヨノオーは頼られたい
+    501069702: (_Option(guts=10), _Option(stamina=10)),
+
+    # 頼りになる人ツアー？
+    501069703: (_Option(power=10), _Option(speed=10)),
+
+    # 頼られる意味
+    501069704: (_Option(wiz=10), _Option(speed=10), _Option(power=10)),
+
+    # カーレースフレンド
+    501069705: (_Option(speed=10), _Option(stamina=10)),
+
+    # ウマ娘演歌大会！
+    501069706: (_Option(power=10), _Option(speed=5, guts=5)),
+
+    # ダンスレッスン
+    501071506: (_Option(speed=10), _Option(power=10)),
+
+    # 前門の母、後門の姉
+    501071510: (_Option(speed=10), _Option(stamina=10)),
+
+    # 乙女の語らい
+    501071511: (_Option(yaruki_up=True, guts=5), _Option(wiz=10)),
+
+    # 信じ合うこと
+    501071513: (_Option(speed=20), _Option(guts=20)),
+
+    # ガラスのワルツ
+    501071514: (_Option(power=10, guts=10), _Option(wiz=20)),
+
+    # 思い出光る昼下がり
+    501071515: (_Option(stamina=20), _Option(wiz=20)),
+
+    # 体が勝手に……？
+    501071520: (_Option(speed=10, skill=15), _Option(skill_hint=True)),
+
+    # アルダンの寄り道講座・初級編
+    501071702: (_Option(power=10), _Option(wiz=10)),
+
+    # アルダンの寄り道講座・追憶編
+    501071704: (_Option(speed=10), _Option(wiz=10), _Option(stamina=10)),
+
+    # 人と観る映画
+    501071705: (_Option(wiz=10), _Option(speed=10)),
+
+    # 意外なたくましさ？
+    501071706: (_Option(stamina=10), _Option(guts=10)),
+
+    # ダンスレッスン
+    501074506: (_Option(power=10), _Option(speed=10)),
+
+    # 輪の中でも変わらずに
+    501074510: (_Option(power=10), _Option(yaruki_up=True, skill=15)),
+
+    # 未来が分かる魔法かも？
+    501074511: (_Option(vital=-10, stamina=20), _Option(speed=5, skill=15)),
+
+    # 蒼き想いを秘めて
+    501074513: (_Option(stamina=20), _Option(wiz=20)),
+
+    # ブライトお嬢様は怖いものなし？
+    501074514: (_Option(guts=10, skill=15), _Option(speed=20)),
+
+    # こころ、穏やかに
+    501074515: (_Option(stamina=10, guts=10), _Option(power=20)),
+
+    # お世話できますもの～！
+    501074520: (_Option(speed=5, power=10), _Option(skill_hint=True)),
+
+    # ブライト・イン・アンダーワールド
+    501074702: (_Option(stamina=10), _Option(wiz=10)),
+
+    # ブライト・イン・ニューワールド
+    501074703: (_Option(guts=10), _Option(speed=10)),
+
+    # ブライト・イン・ワンダーワールド
+    501074704: (_Option(stamina=10), _Option(power=10), _Option(wiz=10)),
+
+    # 支えられて、見守られて
+    501074705: (_Option(speed=10), _Option(wiz=10)),
+
+    # 招き猫さんを救え！
+    501074706: (_Option(guts=10), _Option(power=10)),
+
+    # 不器用なトライアングラム
+    801033001: (_Option(power=15), _Option(vital=10)),
+
+    # 孤高のケフェウス
+    801033002: (_Option(skill_hint=True), _Option(wiz=10)),
+
+    # 喧嘩だワッショイ
+    801034001: (_Option(vital=-5, power=15), _Option(yaruki_up=True, guts=5)),
+
+    # 神輿だワッショイ
+    801034002: (_Option(skill=15), _Option(skill_hint=True)),
+
+    # のんびり、ゆったり。
+    801074001: (_Option(stamina=15, guts=5), _Option(speed=15, power=5)),
+
+    # しっかり、じっくり。
+    801074002: (_Option(vital=10, skill_hint=True), _Option(wiz=20)),
+
+    # きっちり、点検！
+    801077001: (_Option(vital=20), _Option(vital=-10, speed=25)),
+
+    # しっかり、努力！
+    801077002: (_Option(stamina=10), _Option(skill_hint=True)),
+
+    # 人情ラプソディ
+    820022001: (_Option(yaruki_up=True, speed=5), _Option(vital=10, stamina=5)),
+
+    # 商いの道は人の道
+    820022002: (_Option(speed=10, skill=10, skill_hint=True), _Option(stamina=10, skill=10, skill_hint=True)),
+
+    # 千里の道も筋トレから！
+    820040002: (_Option(vital=25), _Option(stamina=10, power=5, skill_hint=True)),
+
+    # あいさつバクシン運動です！！
+    820042001: (_Option(vital=-10, speed=30), _Option(vital=-10, skill=30)),
+
+    # #Currenみつけた
+    820044001: (_Option(speed=20), _Option(skill=10, skill_hint=True)),
+
+    # What is ウマドル？
+    820045001: (_Option(skill_hint=True), _Option(vital=10, power=5)),
+
+    # 頑張れる秘訣は……！
+    820046002: (_Option(wiz=10, skill_hint=True), _Option(speed=10, skill_hint=True)),
+
+    # アヤベさんは挫けない
+    830077003: (_Option(power=15, wiz=10, skill_hint=True), _Option(speed=15, skill=30)),
+
+    # 覇王の危機！？
+    830079001: (_Option(vital=10), _Option(stamina=5, skill_hint=True)),
+
+    # 距離感とかあるし
+    830084001: (_Option(speed=10, stamina=5), _Option(vital=10)),
+
+    # ヲタクの責務
+    830085002: (_Option(stamina=15, skill_hint=True), _Option(wiz=15, skill_hint=True)),
+
+    # 期待をその背に！
+    830086002: (_Option(vital=-10, speed=15, stamina=15, skill_hint=True), _Option(vital=20, skill=10)),
+
+    # わたくし、捜しますわ～
+    830087001: (_Option(yaruki_up=True, stamina=10), _Option(vital=10, wiz=10)),
+
+    # マーベラス☆ダイブ！！
+    830089001: (_Option(wiz=10, skill=10), _Option(vital=-10, guts=25)),
+
+    # 重なるハイとロー
+    830092001: (_Option(speed=10, power=10), _Option(skill_hint=True)),
+
+    # 届かない『キモチ』
+    830093001: (_Option(stamina=10, skill_hint=True), _Option(power=10, skill_hint=True)),
 }
