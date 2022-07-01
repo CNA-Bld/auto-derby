@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import logging
+import random
 from typing import Text
 
 from ... import action, templates, terminal
@@ -59,6 +60,8 @@ def _handle_race_result(ctx: Context, race: Race):
     res.write()
     action.tap(pos)
     if res.is_failed:
+        for _ in action.match_image_until_disappear(templates.SINGLE_MODE_CONTINUE):
+            action.tap(pos)
         ctx.mood = {
             ctx.MOOD_VERY_BAD: ctx.MOOD_BAD,
             ctx.MOOD_BAD: ctx.MOOD_NORMAL,
@@ -112,7 +115,13 @@ class RaceCommand(Command):
         )
         if tmpl.name == templates.SINGLE_MODE_LIVE_BUTTON:
             g.on_winning_live(ctx)
-        action.tap_image(templates.TEAM_RACE_NEXT_BUTTON)
+
+
+        x_offset = random.randint(-10, 90)
+        y_offset = random.randint(-80, 20)
+        _LOGGER.info("offset: %d, %d", x_offset, y_offset)
+
+        action.tap_image(templates.TEAM_RACE_NEXT_BUTTON, x=x_offset, y=y_offset)
 
     def score(self, ctx: Context) -> float:
         return self.race.score(ctx)

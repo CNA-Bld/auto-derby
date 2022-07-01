@@ -1,6 +1,9 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 from __future__ import annotations
+
+import random
+
 from auto_derby.constants import RacePrediction
 
 import logging
@@ -74,6 +77,14 @@ def _pass(ac: _ActionContext):
 
 def _tap(ac: _ActionContext):
     action.tap(ac.pos)
+
+
+def _tap2(ac: _ActionContext):
+    x_offset = random.randint(-10, 90)
+    y_offset = random.randint(-40, 20)
+    pos = (ac.pos[0] + x_offset, ac.pos[1] + y_offset)
+    LOGGER.info("Tapping %s", pos)
+    action.tap(pos)
 
 
 def _cancel(ac: _ActionContext):
@@ -193,7 +204,7 @@ def _template_actions(ctx: Context) -> Iterator[Tuple[_Template, _Handler]]:
     yield templates.SINGLE_MODE_TARGET_UNFINISHED, _cancel
     yield templates.SINGLE_MODE_FINISH_BUTTON, _handle_end
     yield templates.SINGLE_MODE_FORMAL_RACE_BANNER, _handle_target_race
-    yield templates.SINGLE_MODE_RACE_NEXT_BUTTON, _tap
+    yield templates.SINGLE_MODE_RACE_NEXT_BUTTON, _tap2
     yield templates.SINGLE_MODE_OPTION1, _ac_handle_option
     yield templates.GREEN_NEXT_BUTTON, _tap
     yield templates.SINGLE_MODE_URA_FINALS, _handle_target_race
