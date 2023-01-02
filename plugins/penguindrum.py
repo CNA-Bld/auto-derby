@@ -248,9 +248,16 @@ class Plugin(auto_derby.Plugin):
         self._server_thread.start()
         LOGGER.info("Server started at %s", address)
 
-    def infer_choice(self, chara_info: _CharaInfo, story_id: int, choice_ids: list[int]) -> Optional[int]:
+    def infer_choice(self, chara_info: _CharaInfo, story_id: int, event_id: int, choice_ids: list[int]) -> Optional[int]:
         LOGGER.info("Attempting to infer choice for story %d at turn %d, choice_ids %s",
                     story_id, chara_info.turn(), choice_ids)
+
+        if event_id == 102001:
+            # URA ハッピーミーク対決
+            for i, v in enumerate(choice_ids):
+                if v == 1:
+                    return i+1
+            return 1
 
         if (story_id == chara_info.shared_story_id(515)
                 or story_id == chara_info.shared_story_id(802)):  # 愛嬌, 注目株, 練習上手 etc
@@ -279,9 +286,9 @@ class Plugin(auto_derby.Plugin):
         if story_id == chara_info.shared_story_id(516):  # 太り気味
             return 2 if choice_ids[1] == 1 else 1
         if (story_id == chara_info.shared_story_id(708)  # レース勝利！
-                or story_id in (501024724, 501040734, 501040738)
+                or story_id in (501024724, 501040734, 501040738, 501021734)
                 or story_id == chara_info.shared_story_id(709)  # レース入着
-                or story_id in (501040735, 501040739)
+                or story_id in (501040735, 501040739, 501021735)
                 or story_id == chara_info.shared_story_id(710)  # レース敗北
                 or story_id in (501040736, 501040740)):
             return 2 if choice_ids[1] == 1 else 1
@@ -318,9 +325,8 @@ class Plugin(auto_derby.Plugin):
                 unchecked_event_array = response['data']['unchecked_event_array']
                 if len(unchecked_event_array) == 1:
                     event = unchecked_event_array[0]
-                    story_id = event['story_id']
                     choice_ids = [choice['select_index'] for choice in event['event_contents_info']['choice_array']]
-                    inferred_choice = self.infer_choice(chara_info, story_id, choice_ids)
+                    inferred_choice = self.infer_choice(chara_info, event['story_id'], event['event_id'], choice_ids)
                     if inferred_choice is not None:
                         LOGGER.info("Choosing %d", inferred_choice)
                         return inferred_choice
