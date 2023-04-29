@@ -31,6 +31,12 @@ def _stop_race_menu_scroll():
     action.tap(rp.vector2((15, 600), 540))
 
 
+def _is_same_race(a: Race, b: Race) -> bool:
+    if a.name in {'JBCクラシック', 'JBCレディスクラシック', 'JBCスプリント'}:
+        return a.name == b.name
+    return a == b
+
+
 class RaceMenuScene(Scene):
     @classmethod
     def name(cls):
@@ -80,7 +86,7 @@ class RaceMenuScene(Scene):
 
         while True:
             for race2, pos in find_by_race_menu_image(ctx, template.screenshot()):
-                if race2 == race:
+                if _is_same_race(race2, race):
                     action.tap(pos)
                     return
             action.swipe(
