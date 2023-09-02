@@ -72,7 +72,7 @@ class Option:
     def heal_rate(self, ctx: Context) -> float:
         if self.type == self.TYPE_MAIN:
             if ctx.CONDITION_HEADACHE in ctx.conditions:
-                return 0
+                return 1
             return 0.5
         if self.type == self.TYPE_SUPPORT:
             return 0.4
@@ -110,7 +110,7 @@ class Option:
             ctx.MOOD_BAD: 3,
             ctx.MOOD_VERY_BAD: 4,
         }[ctx.mood]
-        ret += mood * min(self.mood_rate(ctx), max_mood_rate)
+        ret += mood * min(self.mood_rate(ctx), max_mood_rate) * 1.2
 
         heal = (
             len(

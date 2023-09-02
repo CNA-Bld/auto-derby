@@ -23,12 +23,12 @@ class HealthCareCommand(Command):
 
 
 def default_score(ctx: Context) -> float:
-    ret = 15 + ctx.turn_count() * 10 / 24
+    ret = 35 + ctx.turn_count() * 10 / 24
     ret += (
         len(
             set(
                 (
-                    Context.CONDITION_HEADACHE,
+                    # Context.CONDITION_HEADACHE,
                     Context.CONDITION_OVERWEIGHT,
                 )
             ).intersection(ctx.conditions)
@@ -36,12 +36,14 @@ def default_score(ctx: Context) -> float:
         * 20
     )
 
+    if ctx.mood >= ctx.MOOD_GOOD:
+        ret *= 0.1
     if ctx.turn_count() >= ctx.total_turn_count() - 2:
         ret *= 0.1
-    if ctx.date[1:] in ((6, 1),):
-        ret += 10
-    if ctx.date[1:] in ((6, 2),):
-        ret += 20
+    # if ctx.date[1:] in ((6, 1),):
+    #     ret += 10
+    # if ctx.date[1:] in ((6, 2),):
+    #     ret += 20
     if ctx.date in ((4, 0, 0)):
         ret -= 20
     return ret
