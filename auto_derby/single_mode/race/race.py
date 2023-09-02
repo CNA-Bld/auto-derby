@@ -125,6 +125,8 @@ class Race:
             return (3,)
         if self.permission == self.PERMISSION_URA:
             return (4,)
+        if self.permission in {6, 7, 8}:
+            return tuple()
         raise ValueError("Race.year: unknown permission: %s" % self.permission)
 
     def __str__(self):
