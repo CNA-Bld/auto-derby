@@ -65,7 +65,7 @@ def compute(ctx: Context, trn: Training) -> float:
     int_ = mathtools.integrate(
         ctx.wisdom,
         trn.wisdom,
-        ((0, 2.0), (300, 0.8), (600, 0.4)),
+        ((0, 2.0), (300, 1.0), (600, 0.4)),
     )
 
     vit = max(min(trn.vitality, 1 - ctx.vitality), 0) * ctx.max_vitality * 0.6
@@ -104,8 +104,8 @@ def compute(ctx: Context, trn: Training) -> float:
         fail_penality = mathtools.interpolate(
             ctx.turn_count(),
             (
-                (0, 30),
-                (72, 60),
+                (0, 50),
+                (72, 80),
             ),
         )
 
@@ -115,5 +115,5 @@ def compute(ctx: Context, trn: Training) -> float:
             (spd + sta + pow + per + int_ + skill + partner + target_level_score + hint)
             * success_rate
             + vit
-            - fail_penality * trn.failure_rate
+            - fail_penality * trn.failure_rate * trn.failure_rate / 0.15
     )
