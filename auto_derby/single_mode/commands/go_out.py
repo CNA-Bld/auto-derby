@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import random
 import time
 from typing import Optional, Text
 
@@ -35,14 +36,15 @@ class GoOutCommand(Command):
     def execute(self, ctx: Context) -> None:
         g.on_command(ctx, self)
         CommandScene.enter(ctx)
+        x_offset, y_offset = random.randint(-20, 100), random.randint(-50, 20)
         action.tap_image(
-            templates.SINGLE_MODE_COMMAND_GO_OUT,
+            templates.SINGLE_MODE_COMMAND_GO_OUT, x=x_offset, y=y_offset
         )
         time.sleep(0.5)
         if action.count_image(templates.SINGLE_MODE_GO_OUT_MENU_TITLE):
             if (
-                self.option.position == (0, 0)
-                and self.option.type == go_out.Option.TYPE_MAIN
+                    self.option.position == (0, 0)
+                    and self.option.type == go_out.Option.TYPE_MAIN
             ):
                 self.option = next(
                     i

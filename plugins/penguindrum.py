@@ -70,6 +70,9 @@ CHOOSE_FIRST_IF_1_ELSE_SECOND: _Resolver = lambda chara_info, choice_ids: 1 if c
 CHOOSE_SECOND_IF_1_ELSE_FIRST: _Resolver = lambda chara_info, choice_ids: 2 if choice_ids[1] == 1 else 1
 
 STORY_CHOICE_RESOLVERS: dict[int, _Resolver] = {
+    # 第一幕　スマイル
+    501005401: ALWAYS_CHOOSE_SECOND,
+
     # オグリの大食い選手権
     501006524: CHOOSE_FIRST_IF_1_ELSE_SECOND,
 
@@ -255,7 +258,7 @@ class Plugin(auto_derby.Plugin):
         if event_id == 102001:
             # URA ハッピーミーク対決
             for i, v in enumerate(choice_ids):
-                if v == 1:
+                if v == 1 or v == 2:
                     return i+1
             return 1
 

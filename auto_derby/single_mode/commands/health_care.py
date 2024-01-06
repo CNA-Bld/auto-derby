@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+import random
+
 from ... import action, templates
 from ...scenes.single_mode.command import CommandScene
 from .. import Context
@@ -14,8 +16,9 @@ class HealthCareCommand(Command):
     def execute(self, ctx: Context) -> None:
         g.on_command(ctx, self)
         CommandScene.enter(ctx)
+        x_offset, y_offset = random.randint(-20, 100), random.randint(-50, 20)
         action.tap_image(
-            templates.SINGLE_MODE_COMMAND_HEALTH_CARE,
+            templates.SINGLE_MODE_COMMAND_HEALTH_CARE, x=x_offset, y=y_offset
         )
 
     def score(self, ctx: Context) -> float:

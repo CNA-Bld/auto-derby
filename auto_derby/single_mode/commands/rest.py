@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+import random
+
 from ... import action, templates
 from ...scenes.single_mode.command import CommandScene
 from .. import Context, Training
@@ -14,8 +16,9 @@ class RestCommand(Command):
     def execute(self, ctx: Context) -> None:
         g.on_command(ctx, self)
         CommandScene.enter(ctx)
+        x_offset, y_offset = random.randint(-10, 100), random.randint(-50, 20)
         action.tap_image(
-            templates.SINGLE_MODE_REST,
+            templates.SINGLE_MODE_REST, x=x_offset, y=y_offset
         )
 
     def score(self, ctx: Context) -> float:

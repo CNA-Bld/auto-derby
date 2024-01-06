@@ -2,6 +2,9 @@
 # pyright: strict
 
 from __future__ import annotations
+
+import random
+
 from auto_derby.single_mode.context import Context
 
 from concurrent import futures
@@ -44,7 +47,8 @@ class TrainingScene(Scene):
     @classmethod
     def _enter(cls, ctx: SceneHolder) -> Scene:
         CommandScene.enter(ctx)
-        action.wait_tap_image(templates.SINGLE_MODE_COMMAND_TRAINING)
+        x_offset, y_offset = random.randint(-30, 170), random.randint(-70, 30)
+        action.wait_tap_image(templates.SINGLE_MODE_COMMAND_TRAINING, x=x_offset, y=y_offset)
         action.wait_image(_TRAINING_CONFIRM)
         return cls()
 

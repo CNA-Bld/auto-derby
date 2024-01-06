@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import random
 import time
 
 import cast_unknown as cast
@@ -53,7 +54,10 @@ class RaceMenuScene(Scene):
         )
         x, y = pos
         rp = action.resize_proxy()
-        if tmpl.name == templates.SINGLE_MODE_FORMAL_RACE_BANNER:
+        if tmpl.name == templates.SINGLE_MODE_COMMAND_RACE:
+            x += random.randint(-25, 90)
+            y += random.randint(-50, 20)
+        elif tmpl.name == templates.SINGLE_MODE_FORMAL_RACE_BANNER:
             y += rp.vector(60, 540)
         action.tap((x, y))
         if tmpl.name == templates.SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER:

@@ -2,6 +2,8 @@
 # pyright: strict
 
 from __future__ import annotations
+
+import random
 from typing import Text
 
 import time
@@ -24,6 +26,8 @@ class TrainingCommand(Command):
         g.on_command(ctx, self)
         scene = TrainingScene.enter(ctx)
         x, y = self.training.confirm_position
+        x += random.randint(-15, 50)
+        y += random.randint(-60, 20)
         if scene.trainings[-1] != self.training:
             action.tap((x, y))
             time.sleep(0.1)
